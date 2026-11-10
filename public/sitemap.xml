@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Páginas públicas do site (src/routes). Ao criar ou remover uma página,
+  atualize esta lista e a data em <lastmod>. /comodidades fica de fora:
+  ela só redireciona para a Home.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://pousadabellavista.com.br/</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://pousadabellavista.com.br/acomodacoes/nascer-do-sol</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://pousadabellavista.com.br/acomodacoes/videiras</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://pousadabellavista.com.br/acomodacoes/por-do-sol</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://pousadabellavista.com.br/reservar</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://pousadabellavista.com.br/galeria</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://pousadabellavista.com.br/gastronomia</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://pousadabellavista.com.br/vale-dos-vinhedos</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://pousadabellavista.com.br/perguntas-frequentes</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://pousadabellavista.com.br/horarios</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://pousadabellavista.com.br/estacionamento</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://pousadabellavista.com.br/politica-de-cancelamento</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://pousadabellavista.com.br/politicas-e-regras</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://pousadabellavista.com.br/politica-de-privacidade</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://pousadabellavista.com.br/politica-de-cookies</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+</urlset>

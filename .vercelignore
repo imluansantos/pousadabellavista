@@ -1,0 +1,11 @@
+node_modules
+dist
+dist-ssr
+.output
+.nitro
+.tanstack
+.wrangler
+.vercel/output
+Claude outputs
+*.log
+*.local
