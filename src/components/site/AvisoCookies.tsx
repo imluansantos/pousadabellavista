@@ -22,24 +22,40 @@ import {
      e registra cada página visitada.
    • A política de cookies tem um botão para rever a escolha.
 
-   Desempenho: o aviso aparece depois que a página carrega (precisa ler a
-   escolha salva no navegador). Por isso ele é propositalmente pequeno e sem
-   animação de entrada: se o texto ocupar uma área grande da tela, o
-   PageSpeed passa a medir o LCP por ele e a nota no celular cai.
+   Desempenho: o aviso só aparece na PRIMEIRA INTERAÇÃO do visitante (rolar,
+   tocar, clicar ou teclar). Se ele surgisse sozinho depois do carregamento,
+   o Google mediria o LCP (maior elemento da tela) por ele, já que o título
+   e a foto da Home entram com animação, e a nota no celular cairia. Como o
+   LCP para de ser medido na primeira interação, assim o aviso não interfere.
+   Nada muda para o GA: ele continua só sendo carregado após o "Aceitar".
    ──────────────────────────────────────────────────────────────────────── */
 
 export function AvisoCookies() {
   const caminho = useLocation({ select: (l) => l.pathname });
   // undefined = ainda não leu o navegador (não mostra nada no servidor)
   const [escolha, setEscolha] = useState<Consentimento | null | undefined>(undefined);
+  // só mostra o aviso depois da primeira interação (ver comentário acima)
+  const [interagiu, setInteragiu] = useState(false);
 
   useEffect(() => {
     if (!GA_ID) return;
     setEscolha(lerConsentimento());
-    const rever = () => setEscolha(null);
+    const rever = () => {
+      setInteragiu(true);
+      setEscolha(null);
+    };
     window.addEventListener(EVENTO_REVER_COOKIES, rever);
     return () => window.removeEventListener(EVENTO_REVER_COOKIES, rever);
   }, []);
+
+  // sem resposta salva: espera o visitante interagir com a página
+  useEffect(() => {
+    if (escolha !== null || interagiu) return;
+    const eventos = ["scroll", "pointerdown", "keydown", "touchstart"] as const;
+    const liberar = () => setInteragiu(true);
+    eventos.forEach((e) => window.addEventListener(e, liberar, { passive: true, once: true }));
+    return () => eventos.forEach((e) => window.removeEventListener(e, liberar));
+  }, [escolha, interagiu]);
 
   // com consentimento: carrega o GA e registra a página atual
   useEffect(() => {
@@ -48,7 +64,7 @@ export function AvisoCookies() {
     registrarPagina(caminho);
   }, [escolha, caminho]);
 
-  if (!GA_ID || escolha !== null) return null;
+  if (!GA_ID || escolha !== null || !interagiu) return null;
 
   function decidir(valor: Consentimento) {
     salvarConsentimento(valor);
