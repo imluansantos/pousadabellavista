@@ -21,6 +21,11 @@ import {
    • Visitas seguintes: respeita a escolha salva; com "aceito", carrega o GA
      e registra cada página visitada.
    • A política de cookies tem um botão para rever a escolha.
+
+   Desempenho: o aviso aparece depois que a página carrega (precisa ler a
+   escolha salva no navegador). Por isso ele é propositalmente pequeno e sem
+   animação de entrada: se o texto ocupar uma área grande da tela, o
+   PageSpeed passa a medir o LCP por ele e a nota no celular cai.
    ──────────────────────────────────────────────────────────────────────── */
 
 export function AvisoCookies() {
@@ -54,27 +59,25 @@ export function AvisoCookies() {
     <aside
       role="dialog"
       aria-label="Aviso de cookies"
-      className="animate-in fade-in slide-in-from-bottom-3 fixed right-20 bottom-4 left-4 z-50 rounded-2xl border border-border bg-background/95 p-5 shadow-xl backdrop-blur duration-500 sm:right-auto sm:bottom-6 sm:left-6 sm:w-[26rem]"
+      className="fixed right-20 bottom-4 left-4 z-50 rounded-2xl border border-border bg-background/95 p-4 shadow-xl backdrop-blur sm:right-auto sm:bottom-6 sm:left-6 sm:w-[22rem]"
     >
-      <p className="flex items-center gap-2 text-[0.7rem] font-semibold tracking-[0.18em] text-wine uppercase">
-        <Cookie aria-hidden className="size-3.5" />
-        Cookies
+      <p className="flex items-start gap-2 text-[0.82rem] leading-snug text-foreground/80">
+        <Cookie aria-hidden className="mt-0.5 size-3.5 shrink-0 text-wine" />
+        <span>
+          Usamos cookies de análise só com o seu aceite.{" "}
+          <Link
+            to="/politica-de-cookies"
+            className="font-medium text-wine underline decoration-wine/30 underline-offset-4"
+          >
+            Saiba mais
+          </Link>
+        </span>
       </p>
-      <p className="mt-2 text-[0.9rem] leading-relaxed text-foreground/80">
-        Usamos cookies de análise (Google Analytics) para entender como o site é usado e
-        melhorá-lo. Eles só são ativados se você aceitar.{" "}
-        <Link
-          to="/politica-de-cookies"
-          className="font-medium text-wine underline decoration-wine/30 underline-offset-4"
-        >
-          Saiba mais
-        </Link>
-      </p>
-      <div className="mt-4 flex flex-wrap gap-2">
-        <button type="button" onClick={() => decidir("aceito")} className="btn-base btn-primary !px-6 !py-2.5">
+      <div className="mt-3 flex flex-wrap gap-2">
+        <button type="button" onClick={() => decidir("aceito")} className="btn-base btn-primary !px-5 !py-2">
           Aceitar
         </button>
-        <button type="button" onClick={() => decidir("recusado")} className="btn-base btn-outline !px-6 !py-2.5">
+        <button type="button" onClick={() => decidir("recusado")} className="btn-base btn-outline !px-5 !py-2">
           Recusar
         </button>
       </div>
