@@ -266,16 +266,18 @@ function ReservarPage() {
         eyebrow="Reservas"
         title="Reserve sua estadia"
         compacto
+        // no celular o cabeçalho fica bem mais baixo: o pedido aparece logo
+        enxutoNoCelular
         veuForteNoCelular
         semTrilhaFlutuante
       >
-        <p className="mt-5 max-w-[48ch] text-[1.02rem] leading-relaxed text-white/85">
+        <p className="mt-5 hidden max-w-[48ch] text-[1.02rem] leading-relaxed text-white/85 sm:block">
           Escolha a suíte e as datas, e finalize o pedido com a nossa equipe pelo WhatsApp.
         </p>
       </PageHero>
 
       <main className="pb-28 lg:pb-0">
-        <div ref={topo} className="mx-auto max-w-7xl scroll-mt-24 px-5 pt-10 sm:px-8 lg:px-10 lg:pt-14">
+        <div ref={topo} className="mx-auto max-w-7xl scroll-mt-24 px-5 pt-7 sm:px-8 sm:pt-10 lg:px-10 lg:pt-14">
           {busca.demo && (
             <p className="mb-8 flex items-start gap-3 rounded-xl border border-dashed border-wine/40 bg-wine/[0.04] p-4 text-[0.85rem] text-wine">
               <FlaskConical aria-hidden className="mt-0.5 size-4 shrink-0" />
@@ -292,14 +294,19 @@ function ReservarPage() {
               <section aria-labelledby="etapa-titulo" className="lg:col-span-8">
                 <Etapas atual={etapa} concluidas={concluidas} onIr={irPara} />
 
-                <div className="mt-8">
-                  <h2 id="etapa-titulo" className="font-display text-[1.9rem] leading-tight sm:text-[2.3rem]">
+                <div className="mt-6 sm:mt-8">
+                  <h2
+                    id="etapa-titulo"
+                    className="font-display text-[1.6rem] leading-[1.15] tracking-[-0.02em] sm:text-[2.3rem] sm:leading-tight sm:tracking-normal"
+                  >
                     {TITULOS[etapa].titulo}
                   </h2>
-                  <p className="mt-2 text-[0.98rem] text-muted-foreground">{TITULOS[etapa].texto}</p>
+                  <p className="mt-2 text-[0.9rem] leading-relaxed text-muted-foreground sm:text-[0.98rem]">
+                    {TITULOS[etapa].texto}
+                  </p>
                 </div>
 
-                <div key={etapa} className="fade-up mt-8">
+                <div key={etapa} className="fade-up mt-6 sm:mt-8">
                   {etapa === "suite" && (
                     <EtapaSuite
                       suite={p.suite}
@@ -335,7 +342,7 @@ function ReservarPage() {
                   <button
                     type="button"
                     onClick={voltar}
-                    className="mt-10 inline-flex items-center gap-2 text-[0.85rem] font-medium text-muted-foreground transition-colors hover:text-foreground"
+                    className="mt-8 inline-flex items-center gap-2 text-[0.85rem] font-medium text-muted-foreground transition-colors hover:text-foreground sm:mt-10"
                   >
                     <ArrowLeft aria-hidden className="size-4" />
                     Voltar
@@ -417,7 +424,8 @@ function EtapaDatas({
   return (
     <div>
       {atalhos.length > 0 && (
-        <div className="mb-8 flex flex-wrap items-center gap-2">
+        // atalhos de fim de semana: só do sm em diante (no celular, direto no calendário)
+        <div className="mb-8 hidden flex-wrap items-center gap-2 sm:flex">
           <span className="mr-1 text-[0.8rem] text-muted-foreground">Fins de semana livres:</span>
           {atalhos.map((a) => {
             const ativo = p.entrada === a.entrada && p.saida === a.saida;
@@ -438,7 +446,7 @@ function EtapaDatas({
         </div>
       )}
 
-      <div className="rounded-2xl border border-border bg-card p-5 sm:p-7">
+      <div className="rounded-2xl border border-border bg-card p-4 sm:p-7">
         <CalendarioReserva ocupadas={ocupadas} entrada={p.entrada} saida={p.saida} onChange={onChange} />
       </div>
 

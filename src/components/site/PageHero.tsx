@@ -36,6 +36,7 @@ import type { ImagemCapa } from "@/data/capas";
        aside={<Busca />}          // opcional
        veuForteNoCelular          // opcional: véu mais escuro abaixo de 1024px
        compacto                   // opcional: cabeçalho mais baixo (ex.: /reservar)
+       enxutoNoCelular            // opcional: com `compacto`, ainda mais baixo no celular
        semTrilhaFlutuante         // opcional: sem a cópia flutuante da trilha
      >
        <p>Texto opcional abaixo do título</p>
@@ -58,6 +59,7 @@ export function PageHero({
   aside,
   veuForteNoCelular = false,
   compacto = false,
+  enxutoNoCelular = false,
   semTrilhaFlutuante = false,
   children,
 }: {
@@ -77,6 +79,9 @@ export function PageHero({
   /** cabeçalho mais baixo, para páginas em que o conteúdo precisa aparecer
    *  logo (ex.: /reservar) */
   compacto?: boolean;
+  /** junto com `compacto`: no celular (abaixo de 640px) o cabeçalho fica bem
+   *  mais baixo, para o conteúdo da página aparecer logo (ex.: /reservar) */
+  enxutoNoCelular?: boolean;
   /** não mostra a cópia flutuante da trilha (ex.: quando a página tem uma
    *  barra fixa no rodapé, como /reservar no celular) */
   semTrilhaFlutuante?: boolean;
@@ -118,7 +123,11 @@ export function PageHero({
     <>
       <header
         className={`relative isolate flex overflow-hidden rounded-b-[1.75rem] bg-ink text-white sm:rounded-b-[2.5rem] ${
-          compacto ? "min-h-[24rem] lg:min-h-[28rem]" : "min-h-[38rem] lg:min-h-[max(40rem,82svh)]"
+          compacto
+            ? enxutoNoCelular
+              ? "min-h-[17rem] sm:min-h-[24rem] lg:min-h-[28rem]"
+              : "min-h-[24rem] lg:min-h-[28rem]"
+            : "min-h-[38rem] lg:min-h-[max(40rem,82svh)]"
         }`}
       >
         <img
@@ -153,20 +162,32 @@ export function PageHero({
 
         <div
           className={`mx-auto flex w-full max-w-7xl flex-col justify-end px-5 sm:px-8 lg:px-10 ${
-            compacto ? "pt-32 pb-9 md:pb-11" : "pt-36 pb-10 md:pb-14 lg:pb-16"
+            compacto
+              ? enxutoNoCelular
+                ? "pt-28 pb-7 sm:pt-32 sm:pb-9 md:pb-11"
+                : "pt-32 pb-9 md:pb-11"
+              : "pt-36 pb-10 md:pb-14 lg:pb-16"
           }`}
         >
           <div ref={ancora} className="fade-up">
             <Trilha trail={trail} />
           </div>
 
-          <div className="mt-8 grid gap-8 md:mt-10 lg:grid-cols-12 lg:items-end lg:gap-12">
+          <div
+            className={`grid gap-8 md:mt-10 lg:grid-cols-12 lg:items-end lg:gap-12 ${
+              enxutoNoCelular ? "mt-6 sm:mt-8" : "mt-8"
+            }`}
+          >
             <div className={aside ? "lg:col-span-7" : "lg:col-span-9"}>
               <p className="fade-up flex items-center gap-4 text-[0.72rem] font-semibold tracking-[0.26em] text-white/75 uppercase [animation-delay:80ms]">
                 <span aria-hidden className="h-px w-8 bg-white/50" />
                 {eyebrow}
               </p>
-              <h1 className="fade-up mt-4 font-display text-[2.6rem] leading-[1.03] tracking-[-0.025em] [animation-delay:140ms] sm:text-6xl lg:text-[4.25rem]">
+              <h1
+                className={`fade-up font-display leading-[1.03] tracking-[-0.025em] [animation-delay:140ms] sm:mt-4 sm:text-6xl lg:text-[4.25rem] ${
+                  enxutoNoCelular ? "mt-3 text-[2.2rem]" : "mt-4 text-[2.6rem]"
+                }`}
+              >
                 {title}
               </h1>
               {children && <div className="fade-up [animation-delay:200ms]">{children}</div>}
