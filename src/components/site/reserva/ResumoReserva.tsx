@@ -140,7 +140,7 @@ export function BarraResumoCelular({
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-12px_30px_-18px_rgba(20,14,12,0.35)] backdrop-blur-md lg:hidden">
       <div className="mx-auto flex max-w-7xl items-center gap-3 px-5 sm:px-8">
         <p className="min-w-0 flex-1 leading-tight">
-          <span className="block truncate text-[0.88rem] font-semibold">{suite?.nome ?? "Monte seu pedido"}</span>
+          <span className="block truncate text-[0.88rem] font-semibold">{suite?.nome ?? "Escolha sua suíte"}</span>
           {datas && (
             <span className="mt-0.5 block truncate text-[0.76rem] text-muted-foreground">
               {datas}
