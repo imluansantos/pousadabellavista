@@ -28,7 +28,7 @@ import {
 import logoMark from "@/assets/logo-mark.webp";
 import logoTitle from "@/assets/logo-title.webp";
 import logoSubtitle from "@/assets/logo-subtitle.webp";
-import logoLunding from "@/assets/lunding-logo.webp";
+import logoLuan from "@/assets/lunding-logo-preta.webp";
 
 /* ─────────────────────────────────────────────────────────────────────────────
    RODAPÉ — fundo vinho, textos brancos
@@ -43,7 +43,8 @@ import logoLunding from "@/assets/lunding-logo.webp";
    colunas começam alinhadas pelo topo).
 
    Embaixo, separado por um fio: direitos reservados à esquerda e o crédito
-   da Lunding à direita (logo pequena + link para lunding.com.br).
+   do desenvolvedor à direita ("Design e código por Luan Santos · Sites &
+   Sistemas Web", com a logo "L" preta + link para imluansantos.com.br).
 
    Celular (< 640px): layout próprio e centralizado (RodapeCelular): logo
    e frase; atalhos de contato em círculos (WhatsApp, Instagram, e-mail e
@@ -324,23 +325,29 @@ export function Footer() {
             reservados.
           </p>
           <a
-            href="https://lunding.com.br"
+            href="https://imluansantos.com.br"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener"
+            aria-label="Design e código por Luan Santos, sites e sistemas web (abre imluansantos.com.br em nova aba)"
             className="group inline-flex shrink-0 flex-nowrap items-center justify-center gap-x-1.5 text-[clamp(0.66rem,calc((100vw-84px)/25),0.8rem)] text-white/70 sm:text-[0.8rem] transition-colors hover:text-white sm:gap-x-2.5"
           >
             {/* no celular a fonte acompanha a largura da tela (clamp), para a
                 linha inteira caber sem quebrar */}
-            <span className="whitespace-nowrap">Desenvolvido por</span>
+            <span className="whitespace-nowrap">Design e código por</span>
             <span className="inline-flex items-center gap-2 whitespace-nowrap">
               <img
-                src={logoLunding}
+                src={logoLuan}
                 alt=""
                 aria-hidden
+                width={20}
+                height={20}
                 className="size-5 rounded-[5px] ring-1 ring-white/20"
               />
               <span>
-                <span className="font-semibold text-white">Lunding</span> - Sites &amp; Soluções Digitais
+                <span className="font-semibold text-white underline decoration-white/30 underline-offset-4 transition-colors group-hover:decoration-white">
+                  Luan Santos
+                </span>{" "}
+                · Sites &amp; Sistemas Web
               </span>
               <ArrowUpRight className="hidden size-3 opacity-60 transition-transform sm:block duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </span>
